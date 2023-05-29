@@ -6,21 +6,23 @@ const myconn = require('express-myconnection');
 const cors = require('cors');
 
 const routes = require('../routes');
-
 const app = express();
+require('dotenv').config(); // Instalar modulo dotenv con npm install
+
 const port = process.env.PORT || 3000;
-const dbOptions = {
-  host: 'byoqitgxwidg9ulnoywg-mysql.services.clever-cloud.com',
-  port: 3306,
-  user: 'usm9oaspwebg88ty',
-  password: 'usm9oaspwebg88ty',
-  database:'byoqitgxwidg9ulnoywg'
-}
+const pool = mysql.createPool({
+  host: process.env.DB_HOST, 
+  user: process.env.DB_USERNAME || 'root', // agregar || 'root'
+  password: process.env.DB_PASSWORD || '1234', // agregar || '1234'
+  database: process.env.DB_DBNAME,
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0
+});
 
 // Middlewares ------------------------------------------------
-app.use(myconn(mysql, dbOptions, 'single'));
+app.use(express.urlencoded({extended: false}));
 app.use(express.json())
-app.use(cors());
 
 // Rutas ------------------------------------------------------
 //
@@ -39,3 +41,8 @@ app.use('/api', routes)
 app.listen(port, () => {
     console.log(`Servidor escuchando en puerto: ${port}`);
 });
+
+pool.getConnection((err, conn) => {
+  if(err) console.log(err)
+  console.log("Conectado exitosamente")
+})
