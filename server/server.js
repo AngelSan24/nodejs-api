@@ -1,10 +1,9 @@
-// server/index.js
-
 const express = require('express');
 const mysql = require('mysql2');
 
-const routes = require('../routes');
 const app = express();
+
+const routes = require('../routes');
 require('dotenv').config(); // Instalar modulo dotenv con npm install
 
 const pool = mysql.createPool({
