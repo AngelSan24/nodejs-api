@@ -26,6 +26,6 @@ app.use('/api', routes)
 // Servidor corriendo ------------------------------------------
 //
 // Escuchar en puerto
-app.listen(port, () => {
+app.listen(port, (req, res) => {
     console.log(`Servidor escuchando en puerto: ${port}`);
 });
