@@ -38,7 +38,7 @@ app.use('/api', routes)
 //
 // Escuchar en puerto
 app.listen(port, () => {
-    console.log(`Servidor escuchando en puerto: ${port}`);
+    //console.log(`Servidor escuchando en puerto: ${port}`);
 });
 
 pool.getConnection((err, conn) => {
