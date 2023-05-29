@@ -1,0 +1,28 @@
+###
+GET http://localhost:3000/api/datos HTTP/1.1
+
+###
+POST http://localhost:3000/api/datos HTTP/1.1
+Content-Type: application/json
+
+{
+    "Apellidos": "Sanabria Olivera",
+    "Nombres": "Angel Eliu",
+    "Sexo": "M",
+    "Estado_Civil": "S"
+}
+
+###
+DELETE http://localhost:3000/api/datos/19 HTTP/1.1
+Content-Type: application/json
+
+###
+PUT http://localhost:3000/api/datos/17 HTTP/1.1
+Content-Type: application/json
+
+{
+    "Apellidos": "Sanabria Guaylupo",
+    "Nombres": "Miguel Angel",
+    "Sexo": "M",
+    "Estado_Civil": "C"
+}
