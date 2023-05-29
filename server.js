@@ -4,7 +4,7 @@ const app = express();
 require('dotenv').config(); // Luego instalar modulo dotenv con npm install
 
 const mysql = require('mysql2');
-const routes = require('./routes');
+const routes = require('.');
 
 const port = process.env.PORT || 3000;
 
