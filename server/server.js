@@ -2,23 +2,22 @@
 
 const express = require('express');
 const mysql = require('mysql2');
-const myconn = require('express-myconnection');
-const cors = require('cors');
 
 const routes = require('../routes');
 const app = express();
 require('dotenv').config(); // Instalar modulo dotenv con npm install
 
-const port = process.env.PORT || 3000;
 const pool = mysql.createPool({
   host: process.env.DB_HOST, 
-  user: process.env.DB_USERNAME || 'root', // agregar || 'root'
-  password: process.env.DB_PASSWORD || '1234', // agregar || '1234'
+  user: process.env.DB_USERNAME, // agregar || 'root'
+  password: process.env.DB_PASSWORD, // agregar || '1234'
   database: process.env.DB_DBNAME,
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0
 });
+
+const port = process.env.PORT || 3000;
 
 // Middlewares ------------------------------------------------
 app.use(express.urlencoded({extended: false}));
