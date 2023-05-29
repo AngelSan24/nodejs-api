@@ -6,20 +6,9 @@ require('dotenv').config(); // Luego instalar modulo dotenv con npm install
 const mysql = require('mysql2');
 const routes = require('./routes');
 
-const pool = mysql.createPool({
-  host: process.env.DB_HOST, 
-  user: process.env.DB_USERNAME, // agregar || 'root'
-  password: process.env.DB_PASSWORD, // agregar || '1234'
-  database: process.env.DB_DBNAME,
-  waitForConnections: true,
-  connectionLimit: 5,
-  queueLimit: 0
-});
-
 const port = process.env.PORT || 3000;
 
 // Middlewares ------------------------------------------------
-app.use(express.urlencoded({extended: false}));
 app.use(express.json())
 app.use(cors());
 
@@ -38,10 +27,5 @@ app.use('/api', routes)
 //
 // Escuchar en puerto
 app.listen(port, () => {
-    //console.log(`Servidor escuchando en puerto: ${port}`);
+    console.log(`Servidor escuchando en puerto: ${port}`);
 });
-
-pool.getConnection((err, conn) => {
-  if(err) console.log(err)
-  console.log("Conectado exitosamente")
-})
