@@ -2,10 +2,18 @@ const express = require('express');
 const app = express();
 
 const mysql = require('mysql2');
-const routes = require('../routes');
+const routes = require('./routes');
 require('dotenv').config(); // Instalar modulo dotenv con npm install
 
-
+const pool = mysql.createPool({
+  host: process.env.DB_HOST, 
+  user: process.env.DB_USERNAME, // agregar || 'root'
+  password: process.env.DB_PASSWORD, // agregar || '1234'
+  database: process.env.DB_DBNAME,
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0
+});
 
 const port = process.env.PORT || 3000;
 
@@ -31,3 +39,7 @@ app.listen(port, () => {
     //console.log(`Servidor escuchando en puerto: ${port}`);
 });
 
+pool.getConnection((err, conn) => {
+  if(err) console.log(err)
+  console.log("Conectado exitosamente")
+})
